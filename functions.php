@@ -21,7 +21,7 @@ class sjKoreanSpellChecker {
 	}
 
 	public function admin_enqueue_scripts() {
-		wp_enqueue_style('sujin_korean_spell', plugin_dir_url( __FILE__ ) . '/style.css');
+		wp_enqueue_style('sujin_korean_spell', plugin_dir_url( __FILE__ ) . 'style.css');
 	}
 
 	public function add_korean_spell_button() {
