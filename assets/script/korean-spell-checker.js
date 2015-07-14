@@ -1,8 +1,18 @@
-(function() {
+jQuery( document ).ready( function ($) {
 	tinymce.create('tinymce.plugins.koreanSpellChecker', {
 		init : function(ed, url) {
-			ed.addCommand('open_korean_spell_checker', function() {
-				window.open('http://speller.cs.pusan.ac.kr/','_blank');
+			ed.addCommand('open_korean_spell_checker', function( e ) {
+				var text = ed.getContent({ format : 'text' });
+				$( '<form/>', {
+					'id':'KSC_form',
+					'target':'_blank',
+					'action':'http://speller.cs.pusan.ac.kr/PnuSpellerISAPI_201504/lib/check.asp',
+					'method':'post',
+					'html':'<textarea name="text1"></textarea>',
+				}).appendTo('body');
+				$( 'form#KSC_form textarea' ).html( text );
+				$( 'form#KSC_form' ).submit();
+				$( 'form#KSC_form' ).remove();
 			});
 
 			// Register buttons
@@ -25,4 +35,4 @@
 
 	// Register plugin
 	tinymce.PluginManager.add('korean_spell', tinymce.plugins.koreanSpellChecker);
-})();
+});
